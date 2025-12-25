@@ -21,9 +21,9 @@ export const MEGA_MENU = {
     ],
     cols: [
         [
-            { icon: "A", title: "Anti-Fraud & Security", desc: "2FA, device trust, risk engine" },
-            { icon: "B", title: "BNPL & Micro-Loans", desc: "Smart limits, instant approvals" },
-            { icon: "C", title: "Cashback Playbook", desc: "Partner deals, coupons, offers" },
+            { icon: "A", title: "Anti-Fraud & Security", desc: "2FA, device trust, risk engine", href: "#blog" },
+            { icon: "B", title: "BNPL & Micro-Loans", desc: "Smart limits, instant approvals", href: "#blog" },
+            { icon: "C", title: "Cashback Playbook", desc: "Partner deals, coupons, offers", href: "#blog" },
         ],
         [
             { icon: "P", title: "Pricing & Fees", desc: "Clear charges, smart plans", href: "#pricing" },
