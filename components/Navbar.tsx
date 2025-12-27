@@ -1,8 +1,8 @@
 "use client";
 
+import { brandDetails, categorizedServices, navLinks } from "@/data";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { brandDetails, categorizedServices, navLinks } from "../../../data";
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -20,14 +20,14 @@ export default function Navbar() {
     return (
         <nav
             id="navbar"
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "shadow-lg" : ""
+            className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? "shadow-lg" : ""
                 }`}
         >
             <div className="gradient-bg">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16 lg:h-20">
                         {/* Logo */}
-                        <div className="flex-shrink-0">
+                        <div className="shrink-0">
                             <Link href="/" className="flex items-center space-x-2">
                                 <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
                                     <i className="fas fa-wallet text-primary-600 text-xl"></i>
@@ -129,7 +129,7 @@ export default function Navbar() {
                         {/* CTA Buttons */}
                         <div className="hidden lg:flex items-center space-x-4">
                             <Link
-                                href="#login"
+                                href="/login"
                                 className="text-white font-medium hover:text-primary-200 transition-colors"
                             >
                                 Login

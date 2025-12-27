@@ -97,7 +97,7 @@ export default function Hero() {
     return (
         <section
             id="home"
-            className={`relative h-screen bg-gradient-to-br ${slide.bgGradient} overflow-hidden`}
+            className={`relative h-screen bg-linear-to-br ${slide.bgGradient} overflow-hidden`}
         >
             {/* Decorative Blobs (light & colorful) */}
             <div className="absolute top-16 left-16 w-64 h-64 bg-cyan-200 rounded-full blur-3xl opacity-40"></div>
@@ -158,7 +158,7 @@ export default function Hero() {
                                     {slide.stats.map((stat, i) => (
                                         <motion.div
                                             key={i}
-                                            ref={(el) => (statsRefs.current[i] = el)}
+                                            ref={(el: any) => (statsRefs.current[i] = el)}
                                             className="text-center"
                                         >
                                             <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
@@ -173,7 +173,7 @@ export default function Hero() {
                                 <div className="relative w-64 h-64">
                                     <div className="absolute inset-0 bg-white rounded-2xl shadow-xl transform rotate-6"></div>
                                     <div className="absolute inset-0 bg-white rounded-2xl shadow-xl transform -rotate-6"></div>
-                                    <div className="absolute inset-2 bg-gradient-to-br from-white to-gray-50 rounded-2xl flex items-center justify-center">
+                                    <div className="absolute inset-2 bg-linear-to-br from-white to-gray-50 rounded-2xl flex items-center justify-center">
                                         <div className={`text-6xl font-bold ${slide.accentColor}`}>
                                             {slide.id === 1 ? "💸" : slide.id === 2 ? "🎁" : "🏢"}
                                         </div>

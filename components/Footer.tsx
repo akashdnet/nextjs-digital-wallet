@@ -1,5 +1,5 @@
+import { brandDetails, footerSections, navLinks, socialLinks } from "@/data";
 import Link from "next/link";
-import { brandDetails, footerSections, navLinks, socialLinks } from "../../../data";
 
 export default function Footer() {
     return (

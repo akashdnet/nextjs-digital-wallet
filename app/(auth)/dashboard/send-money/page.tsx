@@ -1,0 +1,27 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Form from "./Form";
+import Header from "./Header";
+
+export default function SendMoneyPage() {
+    return (
+        <div className="min-h-screen bg-linear-to-br from-green-50 via-blue-50 to-indigo-50 flex items-center justify-center p-4">
+            {/* Decorative Blobs */}
+            <div className="absolute top-20 left-20 w-64 h-64 bg-green-200 rounded-full blur-3xl opacity-30"></div>
+            <div className="absolute bottom-20 right-20 w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
+
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100"
+            >
+                <Header />
+                <div className="p-8">
+                    <Form />
+                </div>
+            </motion.div>
+        </div>
+    );
+}

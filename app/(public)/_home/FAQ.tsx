@@ -39,8 +39,8 @@ export default function FAQ() {
                         <Reveal key={index} delay={index * 0.1}>
                             <div
                                 className={`group bg-white rounded-2xl border transition-all duration-300 ${openIndex === index
-                                        ? "border-primary-200 shadow-xl shadow-primary-100/20"
-                                        : "border-gray-200 hover:border-primary-100 hover:shadow-md"
+                                    ? "border-primary-200 shadow-xl shadow-primary-100/20"
+                                    : "border-gray-200 hover:border-primary-100 hover:shadow-md"
                                     }`}
                             >
                                 <button
@@ -56,8 +56,8 @@ export default function FAQ() {
                                     </h3>
                                     <span
                                         className={`shrink-0 flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 ${openIndex === index
-                                                ? "bg-primary-100 text-primary-600 rotate-180"
-                                                : "bg-gray-100 text-gray-500 group-hover:bg-primary-50 group-hover:text-primary-500"
+                                            ? "bg-primary-100 text-primary-600 rotate-180"
+                                            : "bg-gray-100 text-gray-500 group-hover:bg-primary-50 group-hover:text-primary-500"
                                             }`}
                                     >
                                         <i className="fas fa-chevron-down text-sm"></i>
