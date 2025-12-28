@@ -1,27 +1,45 @@
 "use client";
 
+import { sendContactMessage } from "@/app/servers/contact";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 import { brandDetails, contactInfo } from "../../../data";
 import Reveal from "./Reveal";
 
+const contactSchema = z.object({
+    fullName: z.string().min(2, "Name must be at least 2 characters"),
+    email: z.email("Please enter a valid email address"),
+    message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormValues = z.infer<typeof contactSchema>;
+
 export default function Contact() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: "",
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormValues>({
+        resolver: zodResolver(contactSchema),
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Handle form submission logic here
-        console.log("Form submitted:", formData);
-        alert("Thanks for contacting us! We will get back to you soon.");
-        setFormData({ name: "", email: "", message: "" });
+    const onSubmit = async (data: ContactFormValues) => {
+        setIsSubmitting(true);
+        try {
+            const result = await sendContactMessage(data);
+            if (result.success) {
+                toast.success("Message sent successfully! We'll get back to you soon.");
+                reset();
+            } else {
+                toast.error(result.message || "Failed to send message. Please try again.");
+            }
+        } catch (error) {
+            toast.error("An unexpected error occurred.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -101,7 +119,6 @@ export default function Contact() {
                             <div className="mt-8 pt-8 border-t border-gray-100">
                                 <h4 className="font-semibold text-gray-900 mb-4">Follow Us</h4>
                                 <div className="flex space-x-4">
-
                                     {contactInfo.socialLinks.map((link, index) => (
                                         <Link
                                             key={index}
@@ -124,21 +141,19 @@ export default function Contact() {
                             <div className="absolute bottom-0 left-0 w-32 h-32 bg-secondary-100 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
                             <h3 className="text-2xl font-bold text-gray-900 mb-6 relative z-10">Send us a Message</h3>
-                            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 relative z-10">
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
                                         Full Name
                                     </label>
                                     <input
                                         type="text"
-                                        id="name"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
+                                        id="fullName"
+                                        {...register("fullName")}
+                                        className={`w-full px-4 py-3 rounded-xl border ${errors.fullName ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all`}
                                         placeholder="John Doe"
-                                        required
                                     />
+                                    {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName.message}</p>}
                                 </div>
                                 <div>
                                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -147,13 +162,11 @@ export default function Contact() {
                                     <input
                                         type="email"
                                         id="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
+                                        {...register("email")}
+                                        className={`w-full px-4 py-3 rounded-xl border ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all`}
                                         placeholder="john@example.com"
-                                        required
                                     />
+                                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                                 </div>
                                 <div>
                                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
@@ -161,20 +174,19 @@ export default function Contact() {
                                     </label>
                                     <textarea
                                         id="message"
-                                        name="message"
-                                        value={formData.message}
-                                        onChange={handleChange}
+                                        {...register("message")}
                                         rows={4}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all resize-none"
+                                        className={`w-full px-4 py-3 rounded-xl border ${errors.message ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all resize-none`}
                                         placeholder="How can we help you?"
-                                        required
                                     ></textarea>
+                                    {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
                                 </div>
                                 <button
                                     type="submit"
-                                    className="w-full gradient-bg text-white font-bold py-4 rounded-xl hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+                                    disabled={isSubmitting}
+                                    className={`w-full gradient-bg text-white font-bold py-4 rounded-xl hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                                 >
-                                    Send Message
+                                    {isSubmitting ? 'Sending...' : 'Send Message'}
                                 </button>
                             </form>
                         </div>
