@@ -54,14 +54,22 @@ export default function Pricing() {
                                         />
                                     ))}
                                 </ul>
-                                <button
-                                    className={`w-full py-4 rounded-full font-semibold transition-colors ${plan.highlight
-                                        ? "bg-white text-primary-600 hover:bg-gray-100"
-                                        : "border-2 border-primary-600 text-primary-600 hover:bg-primary-50"
-                                        }`}
-                                >
-                                    {plan.btnText}
-                                </button>
+                                <div className="relative">
+                                    <button
+                                        disabled={plan.name === "Pro" || plan.name === "Business"}
+                                        className={`w-full py-4 rounded-full font-semibold transition-colors ${plan.highlight
+                                            ? "bg-white text-primary-600 hover:bg-gray-100"
+                                            : "border-2 border-primary-600 text-primary-600 hover:bg-primary-50"
+                                            } ${(plan.name === "Pro" || plan.name === "Business") ? "opacity-80 cursor-not-allowed" : ""}`}
+                                    >
+                                        {plan.btnText}
+                                    </button>
+                                    {(plan.name === "Pro" || plan.name === "Business") && (
+                                        <span className="absolute -top-3 -right-2 bg-linear-to-r from-rose-500 to-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg ring-2 ring-white animate-pulse">
+                                            Coming Soon
+                                        </span>
+                                    )}
+                                </div>
                             </div>
                         </Reveal>
                     ))}

@@ -10,6 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FiChevronDown, FiLogOut, FiMenu, FiX } from "react-icons/fi";
 import { toast } from "sonner";
+import { Button } from "./ui/button";
 
 export default function Navbar({ user }: { user?: any }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -84,12 +85,12 @@ export default function Navbar({ user }: { user?: any }) {
                                 onMouseEnter={() => setIsServicesOpen(true)}
                                 onMouseLeave={() => setIsServicesOpen(false)}
                             >
-                                <button
+                                <Button
                                     className="nav-link text-white font-medium hover:text-primary-200 transition-colors flex items-center space-x-1"
                                 >
                                     <span>Services</span>
                                     <FiChevronDown className={`text-xs transition-transform ${isServicesOpen ? "rotate-180" : ""}`} />
-                                </button>
+                                </Button>
 
                                 <AnimatePresence>
                                     {isServicesOpen && (

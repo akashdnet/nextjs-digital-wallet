@@ -52,6 +52,9 @@ export default function Offers() {
                                     </div>
                                 </div>
                             </div>
+                            <span className="absolute -top-3 -right-2 bg-linear-to-r from-rose-500 to-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg ring-2 ring-white animate-pulse">
+                                Coming Soon
+                            </span>
                         </Reveal>
                     ))}
                 </div>
