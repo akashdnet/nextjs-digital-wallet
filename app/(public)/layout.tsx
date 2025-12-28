@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "@/app/globals.css";
+import { getMe } from "@/app/servers/user";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "sonner";
@@ -21,11 +22,14 @@ export const metadata: Metadata = {
   description: "PayBD | Your Digital Wallet",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const userRes = await getMe();
+  const user = userRes?.data?.userInfo;
+
   return (
     <html lang="en" className="scroll-smooth">
       <head>
@@ -37,7 +41,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        <Navbar />
+        <Navbar user={user} />
         <main className="flex-1 bg-gray-50 text-gray-800 overflow-x-hidden font-sans">
           {children}
         </main>

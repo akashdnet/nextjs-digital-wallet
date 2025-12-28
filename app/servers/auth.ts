@@ -66,6 +66,13 @@ export const logout = async () => {
     }
 };
 
+export const localLogout = async () => {
+    const cookieStore = await cookies();
+    cookieStore.delete("accessToken");
+    cookieStore.delete("refreshToken");
+    return { success: true };
+};
+
 export const refreshToken = async () => {
     const cookieStore = await cookies();
     try {

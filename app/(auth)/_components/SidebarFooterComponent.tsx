@@ -1,11 +1,27 @@
+"use client";
 
+import { localLogout } from '@/app/servers/auth';
 import { AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { SidebarFooter } from '@/components/ui/sidebar';
 import { Avatar } from '@radix-ui/react-avatar';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function SidebarFooterComponent({ user }: { user: any }) {
+    const router = useRouter();
+
     if (!user) return null;
+
+    const handleLogout = async () => {
+        try {
+            await localLogout();
+            toast.success("Logged out successfully");
+            router.push("/");
+        } catch (error) {
+            toast.error("Failed to logout");
+        }
+    };
 
     return (
         <SidebarFooter>
@@ -13,7 +29,7 @@ export default function SidebarFooterComponent({ user }: { user: any }) {
                 {/* Profile Image */}
                 <Avatar className='w-12 h-12 rounded-full border-2 border-white shadow-sm'>
                     <AvatarImage src={user.avatar || user.file} alt={user.name} />
-                    <AvatarFallback className="bg-blue-600 text-white font-bold">
+                    <AvatarFallback className="bg-blue-600 text-white font-bold flex items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-indigo-600 h-full w-full">
                         {user.name?.charAt(0).toUpperCase()}
                     </AvatarFallback>
                 </Avatar>
@@ -38,7 +54,13 @@ export default function SidebarFooterComponent({ user }: { user: any }) {
                 </div>
             </div>
             <div className="p-3">
-                <Button variant="destructive" className="w-full font-bold h-9 rounded-lg shadow-sm">Logout</Button>
+                <Button
+                    variant="destructive"
+                    className="w-full font-bold h-9 rounded-lg shadow-sm"
+                    onClick={handleLogout}
+                >
+                    Logout
+                </Button>
             </div>
         </SidebarFooter>
     )
