@@ -1,36 +1,45 @@
 
-import { AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
-import { SidebarFooter } from '@/components/ui/sidebar'
-import { Avatar } from '@radix-ui/react-avatar'
+import { AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { SidebarFooter } from '@/components/ui/sidebar';
+import { Avatar } from '@radix-ui/react-avatar';
 
-export default function SidebarFooterComponent() {
+export default function SidebarFooterComponent({ user }: { user: any }) {
+    if (!user) return null;
+
     return (
         <SidebarFooter>
             <div className="flex items-center gap-3 p-3 bg-gray-50 border-b">
                 {/* Profile Image */}
-                <Avatar className='w-16 h-16 rounded-full'>
-                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                    <AvatarFallback>Avatar</AvatarFallback>
+                <Avatar className='w-12 h-12 rounded-full border-2 border-white shadow-sm'>
+                    <AvatarImage src={user.avatar || user.file} alt={user.name} />
+                    <AvatarFallback className="bg-blue-600 text-white font-bold">
+                        {user.name?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
                 </Avatar>
 
                 {/* User Info */}
-                <div className="flex flex-col">
-                    <span className="text-sm font-medium text-gray-800">
-                        Abdullah
+                <div className="flex flex-col min-w-0">
+                    <span className="text-sm font-bold text-gray-900 truncate">
+                        {user.name}
                     </span>
 
                     {/* Role with subtle highlight */}
-                    <span className="inline-block text-xs px-2 py-0.5 rounded bg-blue-100 text-blue-600 font-medium w-fit">
-                        Admin
+                    <span className={`inline-block text-[10px] px-2 py-0.5 rounded font-bold w-fit uppercase tracking-tighter mt-0.5 ${user.role === 'admin' ? 'bg-indigo-100 text-indigo-700' :
+                        user.role === 'agent' ? 'bg-purple-100 text-purple-700' :
+                            'bg-blue-100 text-blue-700'
+                        }`}>
+                        {user.role}
                     </span>
 
-                    <span className="text-xs text-gray-500">
-                        abdullah@example.com
+                    <span className="text-[10px] text-gray-500 truncate mt-0.5">
+                        {user.email}
                     </span>
                 </div>
             </div>
-            <Button variant="destructive" className="font-bold">Logout</Button>
+            <div className="p-3">
+                <Button variant="destructive" className="w-full font-bold h-9 rounded-lg shadow-sm">Logout</Button>
+            </div>
         </SidebarFooter>
     )
 }

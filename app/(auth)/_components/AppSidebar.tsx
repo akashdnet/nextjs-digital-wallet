@@ -1,4 +1,5 @@
 
+import { getMe } from "@/app/servers/user";
 import { Separator } from "@/components/ui/separator";
 import {
     Sidebar,
@@ -11,19 +12,32 @@ import SidebarLogo from "./SidebarLogo";
 
 
 
-export default function AppSidebar() {
+export default async function AppSidebar() {
+    const userRes = await getMe();
+    console.log(userRes.data.userInfo, "userRes");
+    const user = userRes?.data.userInfo;
+    const role = user?.role;
+
     return (
         <Sidebar>
             <SidebarLogo />
             <Separator />
             <SidebarContent>
-                <Menu title="Admin Management" data={adminMenu} />
-                <Menu title="Agent Management" data={agentMenu} />
-                <Menu title="User Management" data={userMenu} />
+                {role === "admin" && (
+                    <Menu title="Admin Console" data={adminMenu} />
+                )}
+
+                {role === "agent" && (
+                    <Menu title="Agent Services" data={agentMenu} />
+                )}
+
+                {(role === "user" || !role) && (
+                    <Menu title="User Banking" data={userMenu} />
+                )}
 
             </SidebarContent>
             <Separator />
-            <SidebarFooterComponent />
+            <SidebarFooterComponent user={user} />
         </Sidebar>
     )
 }
