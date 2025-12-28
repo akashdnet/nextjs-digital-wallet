@@ -1,10 +1,16 @@
 import { BsCashCoin, BsPhoneFlip } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
 import { FaMoneyBillTrendUp, FaUsersBetweenLines } from "react-icons/fa6";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { PiUsersFour } from "react-icons/pi";
 
 
 export const userMenu = [
+    {
+        title: "Profile",
+        url: "/dashboard/profile",
+        icon: CgProfile,
+    },
     {
         title: "Overview",
         url: "/dashboard/overview",
@@ -29,6 +35,11 @@ export const userMenu = [
 
 export const agentMenu = [
     {
+        title: "Profile",
+        url: "/dashboard/profile",
+        icon: CgProfile,
+    },
+    {
         title: "Overview",
         url: "/dashboard/overview",
         icon: LuLayoutDashboard,
@@ -47,6 +58,11 @@ export const agentMenu = [
 
 
 export const adminMenu = [
+    {
+        title: "Profile",
+        url: "/dashboard/profile",
+        icon: CgProfile,
+    },
     {
         title: "Overview",
         url: "/dashboard/overview",
