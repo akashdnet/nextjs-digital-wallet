@@ -26,11 +26,14 @@ export default async function UserDashboardOverview() {
     }
 
     return (
-        <div className="p-6 space-y-6">
-            <h2 className="text-4xl font-bold mb-12 text-center shadow p-4 sticky top-0 z-10 bg-white">Overview</h2>
+        <section className="p-6 space-y-6">
+            <section className="sticky top-0 z-10 bg-white p-4 shadow mb-12 text-center space-y-2">
+                <h2 className="text-4xl font-bold    ">Overview</h2>
+                <p className="text-sm text-gray-500">These figures reflect the transactions, balances, and spending patterns recorded over the current year - {new Date().getFullYear()}.</p>
+            </section>
             <OverviewCards data={data} />
             <OverviewCharts data={data} />
             <TransactionHistory data={data} />
-        </div>
+        </section>
     );
 }

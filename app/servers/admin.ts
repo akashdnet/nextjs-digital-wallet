@@ -1,23 +1,21 @@
+"use server";
+
+import { cookies } from "next/headers";
 import { BASE_URL } from "./data";
 
-export const getDashboardOverview = async () => {
-    try {
-        const response = await fetch(`${BASE_URL}/admin/dashboard-overview`, {
-            method: "GET",
-        });
-        return await response.json();
-    } catch (error) {
-        console.error("Dashboard overview error:", error);
-        return { success: false, message: "Failed to fetch dashboard data" };
-    }
-};
+
+
+
 
 export const updateWalletStatus = async (userId: string, data: { status: string }) => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
     try {
         const response = await fetch(`${BASE_URL}/admin/update-wallet-status/${userId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                Cookie: cookieString,
             },
             body: JSON.stringify(data),
         });
@@ -29,11 +27,14 @@ export const updateWalletStatus = async (userId: string, data: { status: string 
 };
 
 export const updateUserProfileByAdmin = async (userId: string, data: any) => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
     try {
         const response = await fetch(`${BASE_URL}/admin/update-user-profile/${userId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                Cookie: cookieString,
             },
             body: JSON.stringify(data),
         });
@@ -45,9 +46,15 @@ export const updateUserProfileByAdmin = async (userId: string, data: any) => {
 };
 
 export const deleteUser = async (userId: string) => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
     try {
         const response = await fetch(`${BASE_URL}/admin/delete-user/${userId}`, {
             method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Cookie: cookieString,
+            },
         });
         return await response.json();
     } catch (error) {
@@ -57,9 +64,15 @@ export const deleteUser = async (userId: string) => {
 };
 
 export const getUserList = async (page = 1, limit = 10) => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
     try {
         const response = await fetch(`${BASE_URL}/admin/user-list?page=${page}&limit=${limit}`, {
             method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Cookie: cookieString,
+            },
         });
         return await response.json();
     } catch (error) {
@@ -69,9 +82,15 @@ export const getUserList = async (page = 1, limit = 10) => {
 };
 
 export const getAgentList = async (page = 1, limit = 10) => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
     try {
         const response = await fetch(`${BASE_URL}/admin/agent-list?page=${page}&limit=${limit}`, {
             method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Cookie: cookieString,
+            },
         });
         return await response.json();
     } catch (error) {
@@ -81,9 +100,15 @@ export const getAgentList = async (page = 1, limit = 10) => {
 };
 
 export const getPendingUsers = async () => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
     try {
         const response = await fetch(`${BASE_URL}/admin/pending-users`, {
             method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Cookie: cookieString,
+            },
         });
         return await response.json();
     } catch (error) {
@@ -92,10 +117,17 @@ export const getPendingUsers = async () => {
     }
 };
 
+
 export const getPendingAgents = async () => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
     try {
         const response = await fetch(`${BASE_URL}/admin/pending-agents`, {
             method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Cookie: cookieString,
+            },
         });
         return await response.json();
     } catch (error) {
