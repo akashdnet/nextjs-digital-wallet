@@ -135,7 +135,7 @@ export default function Navbar() {
                                 Login
                             </Link>
                             <Link
-                                href="#register"
+                                href="register"
                                 className="bg-white text-primary-600 px-6 py-2.5 rounded-full font-semibold hover:bg-primary-50 hover:shadow-lg transform hover:scale-105 transition-all duration-300"
                             >
                                 Get Started
@@ -192,13 +192,13 @@ export default function Navbar() {
 
                     <div className="border-t border-gray-100 pt-4 space-y-3">
                         <Link
-                            href="#login"
+                            href="login"
                             className="block w-full text-center py-3 text-primary-600 font-semibold border-2 border-primary-600 rounded-full hover:bg-primary-50 transition-colors"
                         >
                             Login
                         </Link>
                         <Link
-                            href="#register"
+                            href="register"
                             className="block w-full text-center py-3 bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 transition-colors"
                         >
                             Get Started

@@ -18,8 +18,8 @@ export const overviewCards = [
         icon: ArrowPathIcon,
     },
     {
-        title: "Cashback Earned",
-        value: "৳ 1,200",
+        title: "Cashback Earned (coming soon)",
+        value: "৳ 0",
         color: "bg-yellow-50 text-yellow-700",
         icon: GiftIcon,
     },

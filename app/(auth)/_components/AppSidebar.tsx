@@ -1,30 +1,29 @@
 
-import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
     Sidebar,
-    SidebarContent,
-    SidebarFooter
+    SidebarContent
 } from "@/components/ui/sidebar";
 import Menu from "./Menu";
 import { adminMenu, agentMenu, userMenu } from "./MenuList";
-import SidebarHeaderComponent from "./SidebarHeader";
-
+import SidebarFooterComponent from "./SidebarFooterComponent";
+import SidebarLogo from "./SidebarLogo";
 
 
 
 export default function AppSidebar() {
     return (
         <Sidebar>
-            <SidebarHeaderComponent />
+            <SidebarLogo />
+            <Separator />
             <SidebarContent>
                 <Menu title="Admin Management" data={adminMenu} />
                 <Menu title="Agent Management" data={agentMenu} />
                 <Menu title="User Management" data={userMenu} />
 
             </SidebarContent>
-            <SidebarFooter>
-                <Button variant="destructive" className="font-bold">Logout</Button>
-            </SidebarFooter>
+            <Separator />
+            <SidebarFooterComponent />
         </Sidebar>
     )
 }

@@ -52,7 +52,7 @@ export default function HowItWorks() {
                     <Reveal delay={0.4}>
                         <div className="text-center mt-12">
                             <a
-                                href="#register"
+                                href="register"
                                 className="inline-flex items-center space-x-2 gradient-bg text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                             >
                                 <span>Create Your Free Account</span>

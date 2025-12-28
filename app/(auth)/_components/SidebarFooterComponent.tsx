@@ -1,14 +1,17 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { SidebarHeader } from '@/components/ui/sidebar'
 
-export default function SidebarHeaderComponent() {
+import { AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { SidebarFooter } from '@/components/ui/sidebar'
+import { Avatar } from '@radix-ui/react-avatar'
+
+export default function SidebarFooterComponent() {
     return (
-        <SidebarHeader>
+        <SidebarFooter>
             <div className="flex items-center gap-3 p-3 bg-gray-50 border-b">
                 {/* Profile Image */}
-                <Avatar className='w-16 h-16'>
+                <Avatar className='w-16 h-16 rounded-full'>
                     <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarFallback>Avatar</AvatarFallback>
                 </Avatar>
 
                 {/* User Info */}
@@ -27,6 +30,7 @@ export default function SidebarHeaderComponent() {
                     </span>
                 </div>
             </div>
-        </SidebarHeader>
+            <Button variant="destructive" className="font-bold">Logout</Button>
+        </SidebarFooter>
     )
 }

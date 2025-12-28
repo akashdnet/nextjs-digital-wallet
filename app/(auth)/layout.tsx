@@ -35,6 +35,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex h-screen gap-10`}
+        suppressHydrationWarning
       >
         <SidebarProvider>
           <AppSidebar />

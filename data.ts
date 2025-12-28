@@ -76,7 +76,7 @@ export const heroSlides: HeroSlide[] = [
         titleHighlight: "Your Control",
         gradient: "from-primary-300 to-secondary-300",
         desc: "Send money, pay bills, and manage your finances with the most trusted digital wallet. Fast, secure, and always available.",
-        primaryBtn: { label: "Start Free", href: "#register" },
+        primaryBtn: { label: "Start Free", href: "register" },
         secondaryBtn: { label: "Watch Demo", href: "#demo" },
         stats: [
             { label: "Active Users", value: "2M+" },

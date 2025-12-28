@@ -1,29 +1,41 @@
 "use client";
 
+import { login } from "@/app/servers/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiEye, FiEyeOff, FiLock, FiMail } from "react-icons/fi";
 import { LoginFormValues, loginSchema } from "./loginSchema";
 
 export default function LoginForm() {
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
     const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm<LoginFormValues>({
         resolver: zodResolver(loginSchema),
         mode: "onChange",
     });
 
-    const onSubmit = (data: LoginFormValues) => {
-        // setIsSubmitting(true);
-        // try {
-
-        // } catch (error) {
-        //     setIsSubmitting(false);
-        // }
-
+    const onSubmit = async (data: LoginFormValues) => {
+        setIsSubmitting(true);
+        setErrorMsg("");
+        try {
+            const result = await login(data);
+            if (result.success) {
+                router.push("/dashboard/overview");
+            } else {
+                setErrorMsg(result.message || "Invalid credentials. Please try again.");
+            }
+        } catch (error) {
+            console.error("Login submission error:", error);
+            setErrorMsg("An unexpected error occurred. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -55,9 +67,6 @@ export default function LoginForm() {
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                         Password
                     </label>
-                    {/* <Link href="/forgot" className="text-sm text-blue-600 hover:text-blue-800 font-medium">
-                        Forgot?
-                    </Link> */}
                 </div>
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -84,6 +93,13 @@ export default function LoginForm() {
                 )}
             </div>
 
+            {/* Error Message */}
+            {errorMsg && (
+                <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-600 animate-in fade-in duration-300">
+                    {errorMsg}
+                </div>
+            )}
+
             {/* Submit Button */}
             <motion.button
                 whileHover={{ scale: 1.02 }}
@@ -100,3 +116,4 @@ export default function LoginForm() {
         </form>
     );
 }
+

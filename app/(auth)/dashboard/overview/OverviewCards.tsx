@@ -1,12 +1,41 @@
 "use client";
 
+import {
+    ArrowPathIcon,
+    BanknotesIcon,
+    GiftIcon
+} from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
-import { overviewCards } from "./overviewData";
+import { OverviewData } from "./type";
 
-export default function OverviewCards() {
+
+
+export default function OverviewCards({ data }: { data: OverviewData }) {
+    const { balance, totalTransactions } = data;
+    const cards = [
+        {
+            title: "Wallet Balance",
+            value: `৳ ${balance.toLocaleString()}`,
+            color: "bg-blue-50 text-blue-700",
+            icon: BanknotesIcon,
+        },
+        {
+            title: "Total Transactions",
+            value: totalTransactions.toString(),
+            color: "bg-green-50 text-green-700",
+            icon: ArrowPathIcon,
+        },
+        {
+            title: "Cashback Earned (coming soon)",
+            value: "৳ 0",
+            color: "bg-yellow-50 text-yellow-700",
+            icon: GiftIcon,
+        },
+    ];
+
     return (
         <div className="flex justify-between gap-4">
-            {overviewCards.map((card, i) => {
+            {cards.map((card, i) => {
                 const Icon = card.icon;
                 return (
                     <motion.div
