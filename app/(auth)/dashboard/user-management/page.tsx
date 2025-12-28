@@ -1,8 +1,10 @@
 "use client";
 
 import { getPendingUsers, getUserList, updateWalletStatus } from "@/app/servers/admin";
+import { getMe } from "@/app/servers/user";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import UnauthorizedPage from "@/components/UnauthorizedPage";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -213,13 +215,24 @@ const UserTable = ({
 
 // --- Main Page ---
 
-export default function UserManagementPage() {
+export default async function UserManagementPage() {
     const [pendingUsers, setPendingUsers] = useState<User[]>([]);
     const [users, setUsers] = useState<User[]>([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [updatingId, setUpdatingId] = useState<string | null>(null);
     const limit = 10;
+
+
+    const profileFetch = await getMe();
+    const role = profileFetch.data?.userInfo?.role;
+
+    if (role !== "admin") {
+        return <UnauthorizedPage />;
+    }
+
+
+
 
     const fetchData = useCallback(async () => {
         setLoading(true);

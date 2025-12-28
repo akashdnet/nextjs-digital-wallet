@@ -1,10 +1,24 @@
 "use client";
 
+import { getMe } from "@/app/servers/user";
+import UnauthorizedPage from "@/components/UnauthorizedPage";
 import { motion } from "framer-motion";
 import Form from "./Form";
 import Header from "./Header";
 
-export default function CashInPage() {
+export default async function CashInPage() {
+
+
+    const profileFetch = await getMe();
+    const role = profileFetch.data?.userInfo?.role;
+
+    if (role !== "agent") {
+        return <UnauthorizedPage />;
+    }
+
+
+
+
     return (
         <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-blue-50 flex items-center justify-center p-4">
             {/* Decorative Blobs */}

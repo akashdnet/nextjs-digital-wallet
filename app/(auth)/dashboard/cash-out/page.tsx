@@ -1,10 +1,23 @@
 "use client";
 
+import { getMe } from "@/app/servers/user";
+import UnauthorizedPage from "@/components/UnauthorizedPage";
 import { motion } from "framer-motion";
 import Form from "./Form";
 import Header from "./Header";
 
-export default function SendMoneyPage() {
+export default async function SendMoneyPage() {
+
+
+    const profileFetch = await getMe();
+    const role = profileFetch.data?.userInfo?.role;
+
+    if (role !== "user") {
+        return <UnauthorizedPage />;
+    }
+
+
+
     return (
         <div className="min-h-screen bg-linear-to-br from-green-50 via-blue-50 to-indigo-50 flex items-center justify-center p-4">
             {/* Decorative Blobs */}

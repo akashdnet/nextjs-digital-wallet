@@ -1,5 +1,4 @@
 
-import { BASE_URL } from "@/app/servers/data";
 import { overviewData } from "@/app/servers/user";
 import OverviewCards from "./OverviewCards";
 import OverviewCharts from "./OverviewCharts";
@@ -10,11 +9,6 @@ export default async function UserDashboardOverview() {
     const res = await overviewData();
     const data: OverviewData = res?.data;
 
-    console.log(`
-        
-        
-        
-        base url`, BASE_URL)
 
     if (!data) {
         return (
