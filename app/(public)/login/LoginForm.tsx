@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiEye, FiEyeOff, FiLock, FiMail } from "react-icons/fi";
+import { loginAsOptions } from "./data";
 import { LoginFormValues, loginSchema } from "./loginSchema";
 
 export default function LoginForm() {
@@ -15,10 +16,15 @@ export default function LoginForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
 
-    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm<LoginFormValues>({
+    const { register, handleSubmit, setValue, formState: { errors, isDirty, isValid } } = useForm<LoginFormValues>({
         resolver: zodResolver(loginSchema),
         mode: "onChange",
     });
+
+    const handleLoginAs = (email: string, password: string) => {
+        setValue("email", email, { shouldDirty: true, shouldValidate: true });
+        setValue("password", password, { shouldDirty: true, shouldValidate: true });
+    };
 
     const onSubmit = async (data: LoginFormValues) => {
         setIsSubmitting(true);
@@ -40,6 +46,33 @@ export default function LoginForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* Login As Options */}
+            <div className="space-y-3">
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest text-center">Login As</p>
+                <div className="grid grid-cols-2 gap-2">
+                    {loginAsOptions.map((option) => (
+                        <button
+                            key={option.email}
+                            type="button"
+                            onClick={() => handleLoginAs(option.email, option.password)}
+                            className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-bold transition-all ${option.colorClass}`}
+                        >
+                            <option.icon className={option.iconClass} />
+                            {option.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div className="relative">
+                <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div className="w-full border-t border-gray-100"></div>
+                </div>
+                <div className="relative flex justify-center text-xs uppercase tracking-tighter">
+                    <span className="bg-white px-2 text-gray-300">Or use credentials</span>
+                </div>
+            </div>
+
             {/* Email */}
             <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
