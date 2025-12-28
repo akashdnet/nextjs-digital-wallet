@@ -296,7 +296,7 @@ export default function Navbar({ user }: { user?: any }) {
     );
 }
 
-function ServiceItem({ icon, title, desc, color }: { icon: string; title: string; desc: string; color: string }) {
+function ServiceItem({ icon, title, desc, color, link }: { icon: string; title: string; desc: string; color: string; link: string }) {
     const colorClasses: Record<string, string> = {
         primary: "bg-primary-100 text-primary-600 group-hover:bg-primary-600",
         green: "bg-green-100 text-green-600 group-hover:bg-green-600",
@@ -308,7 +308,7 @@ function ServiceItem({ icon, title, desc, color }: { icon: string; title: string
 
     return (
         <Link
-            href="#"
+            href={link}
             className="flex items-center space-x-3 p-3 rounded-xl hover:bg-primary-50 transition-colors group"
         >
             <div

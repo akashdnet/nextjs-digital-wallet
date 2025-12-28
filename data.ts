@@ -176,14 +176,14 @@ export const servicesList = [
 
 export const categorizedServices = {
     moneyTransfer: [
-        { icon: "fas fa-paper-plane", title: "Send Money", desc: "Instant transfers globally", color: "primary" },
-        { icon: "fas fa-download", title: "Cash In", desc: "Add money to wallet", color: "green" },
-        { icon: "fas fa-upload", title: "Cash Out", desc: "Withdraw to bank", color: "orange" },
+        { icon: "fas fa-paper-plane", title: "Send Money", desc: "Instant transfers globally", color: "primary", link: "/dashboard/send-money" },
+        { icon: "fas fa-download", title: "Cash In", desc: "Add money to wallet", color: "green", link: "/dashboard/cash-in" },
+        { icon: "fas fa-upload", title: "Cash Out", desc: "Withdraw to agent", color: "orange", link: "/dashboard/cash-out" },
     ],
     billRecharge: [
-        { icon: "fas fa-mobile-alt", title: "Mobile Recharge", desc: "Top up any number", color: "purple" },
-        { icon: "fas fa-file-invoice", title: "Pay Bills", desc: "Utility & subscriptions", color: "blue" },
-        { icon: "fas fa-qrcode", title: "QR Payment", desc: "Scan & pay instantly", color: "pink" },
+        { icon: "fas fa-mobile-alt", title: "Mobile Recharge", desc: "Top up any number", color: "purple", link: "/dashboard/top-up" },
+        { icon: "fas fa-file-invoice", title: "Pay Bills", desc: "(coming soon)", color: "blue", link: "#" },
+        { icon: "fas fa-qrcode", title: "QR Payment", desc: "(coming soon)", color: "pink", link: "#" },
     ]
 };
 
