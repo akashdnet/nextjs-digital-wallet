@@ -34,8 +34,8 @@ export const socialLinks = [
 // Navigation Links
 export const navLinks = [
     { href: "/", label: "Home" },
-    { href: "#features", label: "Features" },
-    { href: "#pricing", label: "Pricing" },
+    { href: "/#features", label: "Features" },
+    { href: "/#pricing", label: "Pricing" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
 ];
@@ -462,15 +462,14 @@ export const pricingPlans = [
 
 export const footerSections = {
     legal: [
-        { href: "#", label: "Privacy Policy" },
-        { href: "#", label: "Terms of Service" },
-        { href: "#", label: "Refund Policy" },
-        { href: "#", label: "Compliance" },
+        { href: "/privacy-policy", label: "Privacy Policy" },
+        { href: "/terms-of-service", label: "Terms of Service" },
+        { href: "/refund-policy", label: "Refund Policy" },
+        { href: "/compliance", label: "Compliance" },
     ],
     support: [
-        { href: "#", label: "Help Center" },
-        { href: "#", label: "FAQ" },
-        { href: "#", label: "Live Chat" },
-        { href: "#contact", label: "Contact Us" },
+        { href: "/about", label: "About" },
+        { href: "/#faq", label: "FAQ" },
+        { href: "/contact", label: "Contact Us" },
     ]
 }
