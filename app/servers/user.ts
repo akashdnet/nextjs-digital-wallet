@@ -38,18 +38,6 @@ export const overviewData = async () => {
     const cookieStore = await cookies();
     const cookieString = cookieStore.toString();
 
-    console.log(`
-        
-        
-        
-        
-        
-        
-        
-        Cookies:`, cookieString);
-
-
-
 
 
     const response = await fetch(`${BASE_URL}/user/overview`, {
@@ -64,6 +52,13 @@ export const overviewData = async () => {
 
     return response.json();
 };
+
+
+
+
+
+
+
 
 export const updateMe = async (formData: FormData) => {
     const cookieStore = await cookies();

@@ -26,17 +26,17 @@ ChartJS.register(
 );
 
 interface OverviewChartsProps {
-    data: OverviewData;
+    data: OverviewData | null;
 }
 
 export default function OverviewCharts({ data }: OverviewChartsProps) {
-    const { monthlySpend, categorySpend } = data;
+    const { monthlySpend, categorySpend } = data || {};
     const lineChartData = {
-        labels: monthlySpend.map((item) => item.name),
+        labels: monthlySpend?.map((item) => item.name) || [],
         datasets: [
             {
                 label: "Spending (৳)",
-                data: monthlySpend.map((item) => item.total),
+                data: monthlySpend?.map((item) => item.total) || [],
                 borderColor: "rgba(75,192,192,1)",
                 backgroundColor: "rgba(75,192,192,0.2)",
                 tension: 0.3,
@@ -44,15 +44,15 @@ export default function OverviewCharts({ data }: OverviewChartsProps) {
         ],
     };
 
-    const pieChartLabels = Object.keys(categorySpend).map(key =>
+    const pieChartLabels = categorySpend ? Object.keys(categorySpend).map(key =>
         key.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
-    );
+    ) : [];
 
     const pieChartData = {
         labels: pieChartLabels,
         datasets: [
             {
-                data: Object.values(categorySpend),
+                data: categorySpend ? Object.values(categorySpend) : [],
                 backgroundColor: [
                     "rgba(255,99,132,0.6)",
                     "rgba(54,162,235,0.6)",

@@ -1,4 +1,5 @@
 
+import { BASE_URL } from "@/app/servers/data";
 import { overviewData } from "@/app/servers/user";
 import OverviewCards from "./OverviewCards";
 import OverviewCharts from "./OverviewCharts";
@@ -7,7 +8,22 @@ import { OverviewData } from "./type";
 
 export default async function UserDashboardOverview() {
     const res = await overviewData();
-    const data: OverviewData = res.data;
+    const data: OverviewData = res?.data;
+
+    console.log(`
+        
+        
+        
+        base url`, BASE_URL)
+
+    if (!data) {
+        return (
+            <div className="p-6 text-center">
+                <h2 className="text-2xl font-bold text-red-600">Failed to load overview data</h2>
+                <p className="text-gray-500">Please try again later.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="p-6 space-y-6">

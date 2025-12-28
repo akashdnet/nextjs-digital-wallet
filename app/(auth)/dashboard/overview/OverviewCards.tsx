@@ -11,17 +11,17 @@ import { OverviewData } from "./type";
 
 
 export default function OverviewCards({ data }: { data: OverviewData }) {
-    const { balance, totalTransactions } = data;
+    const { balance, totalTransactions } = data || {};
     const cards = [
         {
             title: "Wallet Balance",
-            value: `৳ ${balance.toLocaleString()}`,
+            value: `৳ ${balance?.toLocaleString() || 0}`,
             color: "bg-blue-50 text-blue-700",
             icon: BanknotesIcon,
         },
         {
             title: "Total Transactions",
-            value: totalTransactions.toString(),
+            value: totalTransactions?.toString() || 0,
             color: "bg-green-50 text-green-700",
             icon: ArrowPathIcon,
         },

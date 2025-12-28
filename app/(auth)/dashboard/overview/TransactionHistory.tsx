@@ -5,7 +5,7 @@ import { OverviewData } from "./type";
 
 
 export default function TransactionHistory({ data }: { data: OverviewData }) {
-    const transactions = data.last5Transactions;
+    const transactions = data?.last5Transactions || [];
 
     return (
         <div className="bg-white rounded shadow p-4">
