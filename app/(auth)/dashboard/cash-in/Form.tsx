@@ -1,6 +1,6 @@
 "use client";
 
-import { cashOut } from "@/app/servers/wallet";
+import { cashIn } from "@/app/servers/wallet";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -30,15 +30,15 @@ export default function Form() {
     const onSubmit = async (data: SchemaFormValues) => {
         setIsSubmitting(true);
         try {
-            const result = await cashOut(data);
+            const result = await cashIn(data);
             if (result.success) {
-                toast.success(result.message || "Cash out successful!");
+                toast.success(result.message || "Cash in successful!");
                 reset();
             } else {
-                toast.error(result.message || "Cash out failed. Please try again.");
+                toast.error(result.message || "Cash in failed. Please try again.");
             }
         } catch (error) {
-            console.error("Cash out submission error:", error);
+            console.error("Cash in submission error:", error);
             toast.error("An unexpected error occurred.");
         } finally {
             setIsSubmitting(false);
@@ -49,7 +49,7 @@ export default function Form() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
                 <label htmlFor="to" className="block text-sm font-medium text-gray-700 mb-2">
-                    Agent Mobile Number
+                    User Mobile Number
                 </label>
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -61,7 +61,7 @@ export default function Form() {
                         inputMode="numeric"
                         {...register("to")}
                         className={`w-full pl-10 pr-4 py-3 rounded-xl border ${errors.to ? "border-red-300 bg-red-50" : "border-gray-300"
-                            } focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition`}
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition`}
                         placeholder="017XXXXXXXX"
                         maxLength={11}
                     />
@@ -86,7 +86,7 @@ export default function Form() {
                         step="1"
                         {...register("amount", { valueAsNumber: true })}
                         className={`w-full pl-10 pr-4 py-3 rounded-xl border ${errors.amount ? "border-red-300 bg-red-50" : "border-gray-300"
-                            } focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition`}
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition`}
                         placeholder="100"
                     />
                 </div>
@@ -100,10 +100,10 @@ export default function Form() {
                 disabled={isSubmitting || !isDirty || !isValid}
                 className={`w-full py-3 px-4 rounded-xl font-bold text-white shadow-lg transition ${isSubmitting || !isDirty || !isValid
                     ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-linear-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+                    : "bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
                     }`}
             >
-                {isSubmitting ? "Processing..." : "Cash Out Now"}
+                {isSubmitting ? "Processing..." : "Cash In Now"}
             </motion.button>
         </form>
     );

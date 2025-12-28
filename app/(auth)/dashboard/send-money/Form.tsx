@@ -1,11 +1,13 @@
 "use client";
 
+import { sendMoney } from "@/app/servers/wallet";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { FiPhone } from "react-icons/fi";
+import { toast } from "sonner";
 import { Schema, SchemaFormValues } from "./Schema";
 
 export default function Form() {
@@ -14,6 +16,7 @@ export default function Form() {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors, isValid, isDirty },
     } = useForm<SchemaFormValues>({
         resolver: zodResolver(Schema),
@@ -24,17 +27,26 @@ export default function Form() {
         },
     });
 
-    const onSubmit = (data: SchemaFormValues) => {
+    const onSubmit = async (data: SchemaFormValues) => {
         setIsSubmitting(true);
-        setTimeout(() => {
+        try {
+            const result = await sendMoney(data);
+            if (result.success) {
+                toast.success(result.message || "Money sent successfully!");
+                reset();
+            } else {
+                toast.error(result.message || "Transaction failed. Please try again.");
+            }
+        } catch (error) {
+            console.error("Send money submission error:", error);
+            toast.error("An unexpected error occurred.");
+        } finally {
             setIsSubmitting(false);
-            alert(`✅ Sent $${data.amount} to ${data.to}!`);
-        }, 1200);
+        }
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
             <div>
                 <label htmlFor="to" className="block text-sm font-medium text-gray-700 mb-2">
                     Mobile Number

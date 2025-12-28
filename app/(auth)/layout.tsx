@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "@/app/globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Toaster } from "sonner";
 import AppSidebar from "./_components/AppSidebar";
 
 const geistSans = Geist({
@@ -44,6 +45,7 @@ export default function RootLayout({
             {children}
           </main>
         </SidebarProvider>
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

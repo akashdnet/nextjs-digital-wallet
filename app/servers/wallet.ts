@@ -1,13 +1,23 @@
+"use server";
+
+import { cookies } from "next/headers";
 import { BASE_URL } from "./data";
 
-export const sendMoney = async (data: { amount: string; to: string }) => {
+export const sendMoney = async (data: { amount: string | number; to: string }) => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
+
     try {
         const response = await fetch(`${BASE_URL}/wallet/send-money`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                Cookie: cookieString,
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                ...data,
+                amount: data.amount.toString(),
+            }),
         });
         return await response.json();
     } catch (error) {
@@ -16,14 +26,20 @@ export const sendMoney = async (data: { amount: string; to: string }) => {
     }
 };
 
-export const cashOut = async (data: { amount: string; to: string }) => {
+export const cashOut = async (data: { amount: string | number; to: string }) => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
     try {
         const response = await fetch(`${BASE_URL}/wallet/cash-out`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                Cookie: cookieString,
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                ...data,
+                amount: data.amount.toString(),
+            }),
         });
         return await response.json();
     } catch (error) {
@@ -32,14 +48,20 @@ export const cashOut = async (data: { amount: string; to: string }) => {
     }
 };
 
-export const cashIn = async (data: { amount: string; to: string }) => {
+export const cashIn = async (data: { amount: string | number; to: string }) => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
     try {
         const response = await fetch(`${BASE_URL}/wallet/cash-in`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                Cookie: cookieString,
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                ...data,
+                amount: data.amount.toString(),
+            }),
         });
         return await response.json();
     } catch (error) {
@@ -48,14 +70,20 @@ export const cashIn = async (data: { amount: string; to: string }) => {
     }
 };
 
-export const topUp = async (data: { amount: string; to: string }) => {
+export const topUp = async (data: { amount: string | number; to: string }) => {
+    const cookieStore = await cookies();
+    const cookieString = cookieStore.toString();
     try {
         const response = await fetch(`${BASE_URL}/wallet/top-up`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                Cookie: cookieString,
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                ...data,
+                amount: data.amount.toString(),
+            }),
         });
         return await response.json();
     } catch (error) {
