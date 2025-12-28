@@ -122,7 +122,7 @@ export default function Navbar({ user }: { user?: any }) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="mt-6 pt-6 border-t border-gray-100">
+                                            {/* <div className="mt-6 pt-6 border-t border-gray-100">
                                                 <Link
                                                     href="#services"
                                                     className="flex items-center justify-center space-x-2 text-primary-600 font-medium hover:text-primary-700 transition-colors"
@@ -130,7 +130,7 @@ export default function Navbar({ user }: { user?: any }) {
                                                     <span>View All Services</span>
                                                     <i className="fas fa-arrow-right"></i>
                                                 </Link>
-                                            </div>
+                                            </div> */}
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
@@ -183,7 +183,7 @@ export default function Navbar({ user }: { user?: any }) {
                                                     </div>
                                                 </div>
                                                 <div className="mt-1">
-
+                                                    <h1>asdkfjlaskdjfl;ksajdflsjflskjf;lsjfd;jsd</h1>
                                                     {roleMenu.map((item: any, i: number) => (
                                                         <Link
                                                             key={i}

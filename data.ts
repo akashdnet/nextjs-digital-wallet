@@ -33,11 +33,11 @@ export const socialLinks = [
 
 // Navigation Links
 export const navLinks = [
-    { href: "#home", label: "Home" },
+    { href: "/", label: "Home" },
     { href: "#features", label: "Features" },
     { href: "#pricing", label: "Pricing" },
-    { href: "#about", label: "About" },
-    { href: "#contact", label: "Contact" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
 ];
 
 // Hero Section Data
@@ -471,6 +471,6 @@ export const footerSections = {
         { href: "#", label: "Help Center" },
         { href: "#", label: "FAQ" },
         { href: "#", label: "Live Chat" },
-        { href: "#", label: "Contact Us" },
+        { href: "#contact", label: "Contact Us" },
     ]
 }
