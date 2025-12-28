@@ -1,11 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Divider from "./Divider";
 import LoginForm from "./LoginForm";
 import LoginHeader from "./LoginHeader";
 import SignupLink from "./SignupLink";
-import SocialLogin from "./SocialLogin";
 
 export default function LoginPage() {
     return (
@@ -24,8 +22,8 @@ export default function LoginPage() {
 
                 <div className="p-8">
                     <LoginForm />
-                    <Divider />
-                    <SocialLogin />
+                    {/* <Divider /> */}
+                    {/* <SocialLogin /> */}
                     <SignupLink />
                 </div>
             </motion.div>
